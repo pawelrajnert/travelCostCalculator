@@ -1,6 +1,11 @@
 package prApp;
 
-public class LocalTransportation extends Transportation {
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.io.Serializable;
+
+public class LocalTransportation extends Transportation implements Serializable {
     public LocalTransportation(int kmAmount, int participantsAmount, int tutorsAmount, int pilotsAmount, int driversAmount) {
         super(kmAmount, participantsAmount, tutorsAmount, pilotsAmount, driversAmount);
     }
@@ -23,6 +28,11 @@ public class LocalTransportation extends Transportation {
         } else {
             return LocalTransportCost.bus50;
         }
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.NO_CLASS_NAME_STYLE);
     }
 
 }

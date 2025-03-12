@@ -1,5 +1,8 @@
 package prApp;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.util.ArrayList;
 
 public class ForeignTrip extends Trip {
@@ -68,6 +71,11 @@ public class ForeignTrip extends Trip {
 
     private ForeignTransportCost enumChooser() {
         return ForeignTransportCost.bus50;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.NO_CLASS_NAME_STYLE);
     }
 
 }

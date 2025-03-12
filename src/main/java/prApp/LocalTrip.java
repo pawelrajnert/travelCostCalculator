@@ -1,5 +1,8 @@
 package prApp;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.util.ArrayList;
 
 public class LocalTrip extends Trip {
@@ -69,4 +72,8 @@ public class LocalTrip extends Trip {
         return super.roundAmount();
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }

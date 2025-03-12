@@ -93,6 +93,15 @@ public class AppMenu {
         System.out.println("Wyniki kalkulacji dla transportu krajowego");
         System.out.println("Całkowity koszt transportu wynosi: " +
                 transport.calculateTotalCost() + " zł\n");
+
+        System.out.println("\n \nWprowadź nazwę pliku do którego chcesz zapisać dane: ");
+        scanner.nextLine();
+        String fileName = checkString();
+
+        FileDao<LocalTransportation> ltDao = new FileDao<>();
+
+        ltDao.write(fileName, transport);
+        System.out.println("Zapisano do pliku: " + fileName + ".txt");
     }
 
     private void pickForeignTransport() {
@@ -120,6 +129,15 @@ public class AppMenu {
         System.out.println("Wyniki kalkulacji dla transportu krajowego");
         System.out.println("Całkowity koszt transportu wynosi: " +
                 transport.calculateTotalCost() + " zł\n");
+
+        System.out.println("\n \nWprowadź nazwę pliku do którego chcesz zapisać dane: ");
+        scanner.nextLine();
+        String fileName = checkString();
+
+        FileDao<ForeignTransportation> ftDao = new FileDao<>();
+
+        ftDao.write(fileName, transport);
+        System.out.println("Zapisano do pliku: " + fileName + ".txt");
     }
 
     private void pickLocalTrip() {
@@ -208,6 +226,15 @@ public class AppMenu {
         System.out.println("==================================================================");
         System.out.println("Całkowity koszt wycieczki: " + trip.calculateTotalCost() + " zł");
         System.out.println("Koszt wycieczki na osobę: " + trip.calculateCostPerPerson() + " zł\n");
+
+        System.out.println("\n \nWprowadź nazwę pliku do którego chcesz zapisać dane: ");
+        scanner.nextLine();
+        String fileName = checkString();
+
+        FileDao<LocalTrip> ltDao = new FileDao<>();
+
+        ltDao.write(fileName, trip);
+        System.out.println("Zapisano do pliku: " + fileName + ".txt");
 
     }
 
@@ -301,6 +328,15 @@ public class AppMenu {
         System.out.println("==================================================================");
         System.out.println("Całkowity koszt wycieczki: " + trip.calculateTotalCost() + " zł");
         System.out.println("Koszt wycieczki na osobę: " + trip.calculateCostPerPerson() + " zł\n");
+
+        System.out.println("\n \nWprowadź nazwę pliku do którego chcesz zapisać dane: ");
+        scanner.nextLine();
+        String fileName = checkString();
+
+        FileDao<ForeignTrip> ftDao = new FileDao<>();
+
+        ftDao.write(fileName, trip);
+        System.out.println("Zapisano do pliku: " + fileName + ".txt");
     }
 
 
@@ -318,6 +354,13 @@ public class AppMenu {
             scanner.next();
         }
         return scanner.nextDouble();
+    }
+
+    private String checkString() {
+        while (!scanner.hasNextLine() || scanner.nextLine().isEmpty()) {
+            System.out.println("Wrong input provided");
+        }
+        return scanner.nextLine();
     }
 }
 
