@@ -1,4 +1,4 @@
-package prApp;
+package prapp;
 
 public enum ForeignTransportCost {
     bus50(12.0);

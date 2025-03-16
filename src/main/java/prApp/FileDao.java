@@ -1,13 +1,18 @@
-package prApp;
+package prapp;
 
 import java.io.*;
 
 public class FileDao<T> implements Dao<T> {
+    private final String type;
+
+    public FileDao(Class<T> c) {
+        this.type = "." + c.getSimpleName();
+    }
 
     @Override
     public void write(String name, T o) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(name + ".txt"))) {
-            writer.write(o.toString());
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name + type))) {
+            oos.writeObject(o);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -15,17 +20,9 @@ public class FileDao<T> implements Dao<T> {
 
     @Override
     public T read(String name) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(name + ".txt"))) {
-            StringBuilder sb = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
-
-            System.out.println("Odczytane dane:\n" + sb);
-            return null;
-        } catch (IOException e) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(name + type))) {
+            return (T) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }

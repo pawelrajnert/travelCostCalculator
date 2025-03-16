@@ -1,6 +1,8 @@
-package prApp;
+package prapp;
 
-public abstract class Transportation {
+import java.io.Serializable;
+
+public abstract class Transportation implements Serializable {
     private int kmAmount;
     private int participantsAmount;
     private int tutorsAmount;
@@ -22,7 +24,11 @@ public abstract class Transportation {
     }
 
     public void setKmAmount(int kmAmount) {
-        this.kmAmount = kmAmount;
+        if (kmAmount > 0) {
+            this.kmAmount = kmAmount;
+        } else {
+            System.out.println("Błędna liczba kilometrów przejazdu.");
+        }
     }
 
     public int getParticipantsAmount() {
@@ -30,7 +36,11 @@ public abstract class Transportation {
     }
 
     public void setParticipantsAmount(int participantsAmount) {
-        this.participantsAmount = participantsAmount;
+        if (participantsAmount > 0 && participantsAmount <= 46) { // minimum 1 driver, 1 pilot and 2 tutors
+            this.participantsAmount = participantsAmount;
+        } else {
+            System.out.println("Błędna liczba uczestników. Minimalna liczba to 1, a maksymalna 46.");
+        }
     }
 
     public int getTutorsAmount() {
@@ -38,7 +48,11 @@ public abstract class Transportation {
     }
 
     public void setTutorsAmount(int tutorsAmount) {
-        this.tutorsAmount = tutorsAmount;
+        if (tutorsAmount > 0 && tutorsAmount <= 4) {
+            this.tutorsAmount = tutorsAmount;
+        } else {
+            System.out.println("Błedna liczba opiekunów. Minimalna liczba to 1, a maksymalna to 4.");
+        }
     }
 
     public int getPilotsAmount() {
@@ -46,7 +60,12 @@ public abstract class Transportation {
     }
 
     public void setPilotsAmount(int pilotsAmount) {
-        this.pilotsAmount = pilotsAmount;
+        if (pilotsAmount > 0 && pilotsAmount <= 2) {
+            this.pilotsAmount = pilotsAmount;
+        } else {
+            System.out.println("Błedna liczba pilotów. Minimalna liczba to 1, a maksymalna to 2.");
+        }
+        ;
     }
 
     public int getDriversAmount() {
@@ -54,7 +73,11 @@ public abstract class Transportation {
     }
 
     public void setDriversAmount(int driversAmount) {
-        this.driversAmount = driversAmount;
+        if (driversAmount > 0 && driversAmount <= 2) {
+            this.driversAmount = driversAmount;
+        } else {
+            System.out.println("Błędna liczba kierowców. Minimalna liczba to 1, a maksymalna to 2.");
+        }
     }
 
     public int getPersons() {

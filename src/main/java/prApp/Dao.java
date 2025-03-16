@@ -1,4 +1,4 @@
-package prApp;
+package prapp;
 
 public interface Dao<T> extends AutoCloseable {
 

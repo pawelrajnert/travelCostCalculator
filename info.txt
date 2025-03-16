@@ -1,0 +1,21 @@
+Transport krajowy i transport zagraniczny:
+
+W zależności od wyboru transportu krajowego lub zagranicznego różni się stawka za autobus.
+Dla opcji krajowych stawka kilometrowa to:
+- 9 zł za bus50,
+- 8 zł za bus40,
+- 6.5 zł za bus30.
+(Bus + liczba oznacza autobus o danej pojemności osób.)
+
+UWAGA, DLA TRAS PONIŻEJ 250 km ISTNIEJE USTALONA Z GÓRY STAWKA (NIE JEST TO STAWKA KILOMETROWA):
+- 2000 zł za bus50,
+- 1700 zł za bus40,
+- 1400 zł za bus30.
+
+Dla opcji transportu zagranicznego obecnie jedyną ustaloną stawką kilometrową jest 12 zł (bus50).
+
+Wycieczki krajowe i wycieczki zagraniczne:
+W przypadku wycieczek krajowych wszystkie kwoty do wpisania są w walucie PLN,
+natomiast dla wycieczek zagranicznych opcje wymagające kwoty w walucie EURO są dodatkowo oznaczone symbolem (*).
+
+UWAGA KOŃCOWA, PROGRAM PRZYJMUJE SEPARATOR DZIESIĘTNY (,) PRZYKŁAD: PRAWIDŁOWO WPROWADZONY KOSZT BILETU ZA PIĘĆ I PÓŁ EURO TO (5,5).

@@ -1,8 +1,9 @@
-package prApp;
+package prapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Trip {
+public abstract class Trip implements Serializable {
     private int kilometers;
     private int participantsAmount;
     private int tutorsAmount;
@@ -59,7 +60,11 @@ public abstract class Trip {
     }
 
     public void setKilometers(int kilometers) {
-        this.kilometers = kilometers;
+        if (kilometers > 0) {
+            this.kilometers = kilometers;
+        } else {
+            System.out.println("Błędna liczba kilometrów podczas wycieczki.");
+        }
     }
 
     public int getPersons() {
@@ -73,10 +78,10 @@ public abstract class Trip {
     }
 
     public void setParticipantsAmount(int participantsAmount) {
-        if (participantsAmount > 0) {
+        if (participantsAmount > 0 && participantsAmount <= 46) { // minimum 1 driver, 1 pilot and 2 tutors
             this.participantsAmount = participantsAmount;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędna liczba uczestników. Minimalna liczba to 1, a maksymalna 46.");
         }
     }
 
@@ -85,10 +90,10 @@ public abstract class Trip {
     }
 
     public void setTutorsAmount(int tutorsAmount) {
-        if (tutorsAmount < 0) {
+        if (tutorsAmount > 0 && tutorsAmount <= 4) {
             this.tutorsAmount = tutorsAmount;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błedna liczba opiekunów. Minimalna liczba to 1, a maksymalna to 4.");
         }
     }
 
@@ -97,10 +102,10 @@ public abstract class Trip {
     }
 
     public void setPilotsAmount(int pilotsAmount) {
-        if (pilotsAmount < 0) {
+        if (pilotsAmount > 0 && pilotsAmount <= 2) {
             this.pilotsAmount = pilotsAmount;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błedna liczba pilotów. Minimalna liczba to 1, a maksymalna to 2.");
         }
     }
 
@@ -109,10 +114,10 @@ public abstract class Trip {
     }
 
     public void setDriversAmount(int driversAmount) {
-        if (driversAmount < 0) {
+        if (driversAmount > 0 && driversAmount <= 2) {
             this.driversAmount = driversAmount;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędna liczba kierowców. Minimalna liczba to 1, a maksymalna to 2.");
         }
     }
 
@@ -121,10 +126,10 @@ public abstract class Trip {
     }
 
     public void setAccommodationAmount(int accommodationAmount) {
-        if (accommodationAmount < 0) {
+        if (accommodationAmount > 0 && accommodationAmount < 32) { // max 1 month
             this.accommodationAmount = accommodationAmount;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędna liczba noclegów (liczba nocy).");
         }
     }
 
@@ -133,7 +138,11 @@ public abstract class Trip {
     }
 
     public void setAccommodationCost(ArrayList<Double> accommodationCost) {
-        this.accommodationCost = accommodationCost;
+        if (accommodationCost.size() > 0) {
+            this.accommodationCost = accommodationCost;
+        } else {
+            System.out.println("Błędny koszt za nocleg.");
+        }
     }
 
     public int getFoodAmount() {
@@ -141,10 +150,10 @@ public abstract class Trip {
     }
 
     public void setFoodAmount(int foodAmount) {
-        if (foodAmount < 0) {
+        if (foodAmount > 0 && foodAmount < 32) { // max 1 month
             this.foodAmount = foodAmount;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędna liczba posiłków.");
         }
     }
 
@@ -153,7 +162,11 @@ public abstract class Trip {
     }
 
     public void setFoodCost(ArrayList<Double> foodCost) {
-        this.foodCost = foodCost;
+        if (foodCost.size() > 0) {
+            this.foodCost = foodCost;
+        } else {
+            System.out.println("Błędny koszt za posiłek.");
+        }
     }
 
     public double getTutorWage() {
@@ -161,10 +174,10 @@ public abstract class Trip {
     }
 
     public void setTutorWage(double tutorWage) {
-        if (tutorWage < 0) {
+        if (tutorWage > 0) {
             this.tutorWage = tutorWage;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędne wynagrodzenie wychowawcy.");
         }
     }
 
@@ -173,10 +186,10 @@ public abstract class Trip {
     }
 
     public void setPilotWage(double pilotWage) {
-        if (pilotWage < 0) {
+        if (pilotWage > 0) {
             this.pilotWage = pilotWage;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędne wynagrodzenie pilota.");
         }
     }
 
@@ -185,10 +198,10 @@ public abstract class Trip {
     }
 
     public void setInsuranceCost(double insuranceCost) {
-        if (insuranceCost < 0) {
+        if (insuranceCost > 0) {
             this.insuranceCost = insuranceCost;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędny koszt ubezpieczenia.");
         }
     }
 
@@ -197,10 +210,10 @@ public abstract class Trip {
     }
 
     public void setGuideAmount(int guideAmount) {
-        if (guideAmount < 0) {
+        if (guideAmount > 0) {
             this.guideAmount = guideAmount;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędna liczba przewodników.");
         }
     }
 
@@ -209,7 +222,11 @@ public abstract class Trip {
     }
 
     public void setGuideCost(ArrayList<Double> guideCost) {
-        this.guideCost = guideCost;
+        if (guideCost.size() > 0) {
+            this.guideCost = guideCost;
+        } else {
+            System.out.println("Błędne wynagrodzenie przewodnika.");
+        }
     }
 
     public double getEntranceAmount() {
@@ -217,15 +234,19 @@ public abstract class Trip {
     }
 
     public void setEntranceAmount(double entranceAmount) {
-        if (entranceAmount < 0) {
+        if (entranceAmount > 0) {
             this.entranceAmount = entranceAmount;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędna liczba wstępów.");
         }
     }
 
     public void setEntranceFees(ArrayList<Double> entranceFees) {
-        this.entranceFees = entranceFees;
+        if (entranceFees.size() > 0) {
+            this.entranceFees = entranceFees;
+        } else {
+            System.out.println("Błędny koszt biletu wstępu.");
+        }
     }
 
     public ArrayList<Double> getEntranceFees() {
@@ -240,7 +261,7 @@ public abstract class Trip {
         if (margin < 0 || margin > 100) {
             this.margin = margin;
         } else {
-            System.out.println("Wrong argument provided.");
+            System.out.println("Błędna wartość marży.");
         }
     }
 
@@ -249,10 +270,10 @@ public abstract class Trip {
     }
 
     public void setDiscount(double discount) {
-        if (discount < 0 || discount > 100)
+        if (discount < 0 || discount > 100) {
             this.discount = discount;
-        else {
-            System.out.println("Wrong argument provided.");
+        } else {
+            System.out.println("Błędna wartość rabatu.");
         }
     }
 

@@ -1,4 +1,4 @@
-package prApp;
+package prapp;
 
 public enum Under250km {
     busshort50(2000.0),

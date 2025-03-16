@@ -1,4 +1,4 @@
-package prApp;
+package prapp;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -6,7 +6,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.ArrayList;
 
 public class ForeignTrip extends Trip {
-    private ForeignTransportCost transportCost;
     private double euroRate;
 
     public ForeignTrip(int kilometers, int participantsAmount, int tutorsAmount, int pilotsAmount, int driversAmount, int accommodationAmount, ArrayList<Double> accommodationCost, int foodAmount, ArrayList<Double> foodCost, double tutorWage, double pilotWage, double insuranceCost, int guideAmount, ArrayList<Double> guideCost, double entranceAmount, ArrayList<Double> entranceFees, double margin, double discount, double euroRate) {
@@ -75,7 +74,7 @@ public class ForeignTrip extends Trip {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.NO_CLASS_NAME_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }
