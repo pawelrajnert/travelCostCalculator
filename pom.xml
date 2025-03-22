@@ -6,8 +6,13 @@
     <groupId>prapp</groupId>
     <artifactId>travelCalculator</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <name>travelCalculator</name>
+    <modules>
+        <module>View</module>
+        <module>Model</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

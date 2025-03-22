@@ -28,3 +28,5 @@ replay_pid*
 target/
 out/
 META-INF/
+mvnw
+mvnw.cmd

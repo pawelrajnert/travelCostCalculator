@@ -57,7 +57,7 @@ public class TransportChooser {
         }
     }
 
-    private void createNewTransport(int type) {
+    public void createNewTransport(int type) {
         System.out.println("\nInformacje o długości trasy ");
         System.out.print("Wprowadź odległość (km): ");
         int kmAmount = vd.checkInt();
