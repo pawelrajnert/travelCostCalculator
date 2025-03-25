@@ -5,21 +5,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import prapp.LocalTransportation;
-
-import java.io.*;
-
 import prapp.FileDao;
+import prapp.ForeignTransportation;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
-public class LocalTransportController {
-    private LocalTransportation transportation;
-    private final FileDao<LocalTransportation> fileDao = new FileDao<>(LocalTransportation.class);
+public class ForeignTransportController {
+    private ForeignTransportation transportation;
+    private final FileDao<ForeignTransportation> fileDao = new FileDao<>(ForeignTransportation.class);
 
     @FXML
     private Button backButton;
@@ -67,7 +66,7 @@ public class LocalTransportController {
         }
     }
 
-    public void saveLT() {
+    public void saveFT() {
         try {
             int km = Integer.parseInt(distanceBox.getText());
             int participants = Integer.parseInt(participantsBox.getText());
@@ -80,19 +79,19 @@ public class LocalTransportController {
                 showAlert("Błąd podczas wpisywania danych", "Wprowadzono niepoprawne dane");
                 return;
             }
-            transportation = new LocalTransportation(km, participants, tutors, pilots, drivers);
+            transportation = new ForeignTransportation(km, participants, tutors, pilots, drivers);
 
 
             if (transportation != null) {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Zapisz dane kalkulacji");
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Plik kalkulacji .LocalTransportation", "*.LocalTransportation"));
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Plik kalkulacji .ForeignTransportation", "*.ForeignTransportation"));
 
                 File file = fileChooser.showSaveDialog(new Stage());
                 if (file != null) {
-                    String fileName = file.getAbsolutePath().replaceAll("\\.LocalTransportation$", "");
+                    String fileName = file.getAbsolutePath().replaceAll("\\.ForeignTransportation$", "");
                     fileDao.write(fileName, transportation);
-                    showAlert("Poprawnie wprowadzone dane", "Zapisano w pliku: " + fileName + ".LocalTransportation");
+                    showAlert("Poprawnie wprowadzone dane", "Zapisano w pliku: " + fileName + ".ForeignTransportation");
                 }
             }
         } catch (NumberFormatException e) {
@@ -104,14 +103,14 @@ public class LocalTransportController {
         }
     }
 
-    public void loadLT() {
+    public void loadFT() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Wczytaj dane kalkulacji");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Plik kalkulacji .LocalTransportation", "*.LocalTransportation"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Plik kalkulacji .ForeignTransportation", "*.ForeignTransportation"));
 
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
-            String fileName = file.getAbsolutePath().replaceAll("\\.LocalTransportation$", "");
+            String fileName = file.getAbsolutePath().replaceAll("\\.ForeignTransportation$", "");
             transportation = fileDao.read(fileName);
 
             if (transportation != null) {
@@ -121,7 +120,7 @@ public class LocalTransportController {
                 pilotsBox.setText(String.valueOf(transportation.getPilotsAmount()));
                 driversBox.setText(String.valueOf(transportation.getDriversAmount()));
                 transportCost();
-                showAlert("Wczytano dane kalkulacji transportu zagranicznego", "Odczytano wartości z pliku: " + fileName + ".LocalTransportation");
+                showAlert("Wczytano dane kalkulacji transportu zagranicznego", "Odczytano wartości z pliku: " + fileName + ".ForeignTransportation");
             } else {
                 showAlert("Błąd podczas wczytywania danych", "Nie udało się wczytać kalkulacji");
             }
@@ -142,7 +141,7 @@ public class LocalTransportController {
                 return;
             }
 
-            transportation = new LocalTransportation(km, participants, tutors, pilots, drivers);
+            transportation = new ForeignTransportation(km, participants, tutors, pilots, drivers);
             double cost = transportation.calculateTotalCost();
             costBox.setText(String.format(cost + " zł"));
 
