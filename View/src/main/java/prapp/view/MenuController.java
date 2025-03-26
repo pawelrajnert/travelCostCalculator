@@ -26,7 +26,19 @@ public class MenuController {
 
     @FXML
     private void clickLTrip() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("local-trip-view.fxml"));
+            String ltripCSS = Objects.requireNonNull(this.getClass().getResource("/tripstyle.css")).toExternalForm();
+            BorderPane ltripPane = loader.load();
+            Scene ltripScene = new Scene(ltripPane, 700, 500);
+            ltripScene.getStylesheets().add(ltripCSS);
+            Stage stage = (Stage) LTrip.getScene().getWindow();
+            stage.setScene(ltripScene);
+            stage.show();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

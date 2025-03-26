@@ -18,7 +18,7 @@ public abstract class Trip implements Serializable {
     private double insuranceCost;
     private int guideAmount;
     private ArrayList<Double> guideCost;
-    private double entranceAmount;
+    private int entranceAmount;
     private ArrayList<Double> entranceFees;
     private double margin;
     private double discount;
@@ -34,7 +34,7 @@ public abstract class Trip implements Serializable {
         return perPersonCost;
     }
 
-    public Trip(int kilometers, int participantsAmount, int tutorsAmount, int pilotsAmount, int driversAmount, int accommodationAmount, ArrayList<Double> accommodationCost, int foodAmount, ArrayList<Double> foodCost, double tutorWage, double pilotWage, double insuranceCost, int guideAmount, ArrayList<Double> guideCost, double entranceAmount, ArrayList<Double> entranceFees, double margin, double discount) {
+    public Trip(int kilometers, int participantsAmount, int tutorsAmount, int pilotsAmount, int driversAmount, int accommodationAmount, ArrayList<Double> accommodationCost, int foodAmount, ArrayList<Double> foodCost, double tutorWage, double pilotWage, double insuranceCost, int guideAmount, ArrayList<Double> guideCost, int entranceAmount, ArrayList<Double> entranceFees, double margin, double discount) {
         this.kilometers = kilometers;
         this.participantsAmount = participantsAmount;
         this.tutorsAmount = tutorsAmount;
@@ -229,11 +229,11 @@ public abstract class Trip implements Serializable {
         }
     }
 
-    public double getEntranceAmount() {
+    public int getEntranceAmount() {
         return entranceAmount;
     }
 
-    public void setEntranceAmount(double entranceAmount) {
+    public void setEntranceAmount(int entranceAmount) {
         if (entranceAmount > 0) {
             this.entranceAmount = entranceAmount;
         } else {

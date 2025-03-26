@@ -56,7 +56,7 @@ public class ForeignTransportController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menu-view.fxml"));
             String menuCSS = Objects.requireNonNull(this.getClass().getResource("/menustyle.css")).toExternalForm();
             BorderPane menuPane = loader.load();
-            Scene menuScene = new Scene(menuPane, 650, 450);
+            Scene menuScene = new Scene(menuPane, 700, 500);
             menuScene.getStylesheets().add(menuCSS);
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(menuScene);
@@ -80,7 +80,7 @@ public class ForeignTransportController {
                 return;
             }
             transportation = new ForeignTransportation(km, participants, tutors, pilots, drivers);
-
+            transportCost();
 
             if (transportation != null) {
                 FileChooser fileChooser = new FileChooser();

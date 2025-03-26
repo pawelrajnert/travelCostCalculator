@@ -57,7 +57,7 @@ public class LocalTransportController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("menu-view.fxml"));
             String menuCSS = Objects.requireNonNull(this.getClass().getResource("/menustyle.css")).toExternalForm();
             BorderPane menuPane = loader.load();
-            Scene menuScene = new Scene(menuPane, 650, 450);
+            Scene menuScene = new Scene(menuPane, 700, 500);
             menuScene.getStylesheets().add(menuCSS);
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(menuScene);
@@ -81,7 +81,7 @@ public class LocalTransportController {
                 return;
             }
             transportation = new LocalTransportation(km, participants, tutors, pilots, drivers);
-
+            transportCost();
 
             if (transportation != null) {
                 FileChooser fileChooser = new FileChooser();
@@ -95,6 +95,7 @@ public class LocalTransportController {
                     showAlert("Poprawnie wprowadzone dane", "Zapisano w pliku: " + fileName + ".LocalTransportation");
                 }
             }
+
         } catch (NumberFormatException e) {
             showAlert("Błąd podczas zapisu danych", "Wprowadzono wartości nie będące poprawnymi liczbami");
         } catch (IllegalArgumentException e) {
@@ -121,7 +122,7 @@ public class LocalTransportController {
                 pilotsBox.setText(String.valueOf(transportation.getPilotsAmount()));
                 driversBox.setText(String.valueOf(transportation.getDriversAmount()));
                 transportCost();
-                showAlert("Wczytano dane kalkulacji transportu zagranicznego", "Odczytano wartości z pliku: " + fileName + ".LocalTransportation");
+                showAlert("Wczytano dane kalkulacji transportu lokalnego", "Odczytano wartości z pliku: " + fileName + ".LocalTransportation");
             } else {
                 showAlert("Błąd podczas wczytywania danych", "Nie udało się wczytać kalkulacji");
             }
@@ -158,4 +159,5 @@ public class LocalTransportController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

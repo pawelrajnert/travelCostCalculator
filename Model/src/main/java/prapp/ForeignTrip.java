@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ForeignTrip extends Trip {
     private double euroRate;
 
-    public ForeignTrip(int kilometers, int participantsAmount, int tutorsAmount, int pilotsAmount, int driversAmount, int accommodationAmount, ArrayList<Double> accommodationCost, int foodAmount, ArrayList<Double> foodCost, double tutorWage, double pilotWage, double insuranceCost, int guideAmount, ArrayList<Double> guideCost, double entranceAmount, ArrayList<Double> entranceFees, double margin, double discount, double euroRate) {
+    public ForeignTrip(int kilometers, int participantsAmount, int tutorsAmount, int pilotsAmount, int driversAmount, int accommodationAmount, ArrayList<Double> accommodationCost, int foodAmount, ArrayList<Double> foodCost, double tutorWage, double pilotWage, double insuranceCost, int guideAmount, ArrayList<Double> guideCost, int entranceAmount, ArrayList<Double> entranceFees, double margin, double discount, double euroRate) {
         super(kilometers, participantsAmount, tutorsAmount, pilotsAmount, driversAmount, accommodationAmount, accommodationCost, foodAmount, foodCost, tutorWage, pilotWage, insuranceCost, guideAmount, guideCost, entranceAmount, entranceFees, margin, discount);
         this.euroRate = euroRate;
     }
@@ -25,24 +25,32 @@ public class ForeignTrip extends Trip {
     public double calculateTotalCost() {
         double totalCost = 0;
 
-        for (double cost : getAccommodationCost()) {
-            totalCost += cost * getPersons() * getEuroRate();
+        if (getAccommodationAmount() > 0) {
+            for (double cost : getAccommodationCost()) {
+                totalCost += cost * getPersons();
+            }
         }
 
-        for (double cost : getFoodCost()) {
-            totalCost += cost * getPersons() * getEuroRate();
+        if (getFoodAmount() > 0) {
+            for (double cost : getFoodCost()) {
+                totalCost += cost * getPersons();
+            }
         }
 
         totalCost += getTutorsAmount() * getTutorWage();
         totalCost += getPilotsAmount() * getPilotWage();
         totalCost += getInsuranceCost();
 
-        for (double cost : getGuideCost()) {
-            totalCost += cost * getEuroRate();
+        if (getGuideAmount() > 0) {
+            for (double cost : getGuideCost()) {
+                totalCost += cost;
+            }
         }
 
-        for (double cost : getEntranceFees()) {
-            totalCost += cost * getPersons() * getEuroRate();
+        if (getEntranceAmount() > 0) {
+            for (double cost : getEntranceFees()) {
+                totalCost += cost * getPersons();
+            }
         }
 
         if (getKilometers() < 250) {
