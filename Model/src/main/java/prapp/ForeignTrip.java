@@ -27,13 +27,13 @@ public class ForeignTrip extends Trip {
 
         if (getAccommodationAmount() > 0) {
             for (double cost : getAccommodationCost()) {
-                totalCost += cost * getPersons();
+                totalCost += cost * getPersons() * getEuroRate();
             }
         }
 
         if (getFoodAmount() > 0) {
             for (double cost : getFoodCost()) {
-                totalCost += cost * getPersons();
+                totalCost += cost * getPersons() * getEuroRate();
             }
         }
 
@@ -43,13 +43,13 @@ public class ForeignTrip extends Trip {
 
         if (getGuideAmount() > 0) {
             for (double cost : getGuideCost()) {
-                totalCost += cost;
+                totalCost += cost * getEuroRate();
             }
         }
 
         if (getEntranceAmount() > 0) {
             for (double cost : getEntranceFees()) {
-                totalCost += cost * getPersons();
+                totalCost += cost * getPersons() * getEuroRate();
             }
         }
 

@@ -65,7 +65,6 @@ public abstract class Transportation implements Serializable {
         } else {
             System.out.println("Błedna liczba pilotów. Minimalna liczba to 1, a maksymalna to 2.");
         }
-        ;
     }
 
     public int getDriversAmount() {

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 
+import prapp.CheckFunctions;
 import prapp.FileDao;
 import prapp.LocalTrip;
 
@@ -97,6 +98,11 @@ public class LocalTripController {
     @FXML
     private Button costButton;
 
+    @FXML
+    public void initialize() {
+        startLimitation();
+    }
+
     public void goBack() {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("menu-view.fxml"));
@@ -109,8 +115,7 @@ public class LocalTripController {
         }
     }
 
-
-    public void saveLT() {
+    public LocalTrip dataLoader() {
         try {
             int km = Integer.parseInt(distanceBox.getText());
             int participants = Integer.parseInt(participantsBox.getText());
@@ -137,11 +142,38 @@ public class LocalTripController {
             double margin = Double.parseDouble(marginBox.getText());
             double discount = Double.parseDouble(discountBox.getText());
 
-            trip = new LocalTrip(km, participants, tutors, pilots, drivers, acoAmount, accommodationCost,
+            if (km <= 0 || km > 20000 || participants <= 0 || participants > 46 || tutors <= 0 || tutors > 4 ||
+                    pilots <= 0 || pilots > 2 || drivers <= 0 || drivers > 2 || acoAmount < 0 || acoAmount > 31 ||
+                    fdAmount < 0 || fdAmount > 31 || gdAmount < 0 || entrAmount < 0 || margin < 0 ||
+                    margin > 100 || discount < 0 || discount > 100 || tutorWage < 0 || tutorWage > 5000 ||
+                    pilotWage < 0 || pilotWage > 5000 || insuranceCost < 0 ||
+                    CheckFunctions.wrongValueInArray(accommodationCost, 0, 1000) ||
+                    CheckFunctions.wrongValueInArray(foodCost, 0, 300) ||
+                    CheckFunctions.wrongValueInArray(guideCost, 0, 2000) ||
+                    CheckFunctions.wrongValueInArray(entranceFees, 0, 1000)) {
+                showAlert("Błąd podczas wpisywania danych", "Wprowadzono niepoprawne dane");
+                return null;
+            }
+
+
+            return new LocalTrip(km, participants, tutors, pilots, drivers, acoAmount, accommodationCost,
                     fdAmount, foodCost, tutorWage, pilotWage, insuranceCost, gdAmount, guideCost, entrAmount, entranceFees, margin, discount);
 
-            tripCost();
+        } catch (Exception e) {
+            showAlert("Błąd podczas ładowania danych", "Wystąpił nieoczekiwany błąd: " + e.getMessage());
+            return null;
+        }
+    }
 
+
+    public void saveLT() {
+        try {
+            trip = dataLoader();
+            if (trip == null) {
+                return;
+            }
+
+            tripCost();
 
             if (trip != null) {
                 FileChooser fileChooser = new FileChooser();
@@ -205,33 +237,10 @@ public class LocalTripController {
 
     public void tripCost() {
         try {
-            int km = Integer.parseInt(distanceBox.getText());
-            int participants = Integer.parseInt(participantsBox.getText());
-            int tutors = Integer.parseInt(tutorsBox.getText());
-            int pilots = Integer.parseInt(pilotsBox.getText());
-            int drivers = Integer.parseInt(driversBox.getText());
-
-            int acoAmount = Integer.parseInt(accomodationAmount.getText());
-            ArrayList<Double> accommodationCost = costsFromArray(getTextFromVBox(accomodationArray));
-
-            int fdAmount = Integer.parseInt(foodAmount.getText());
-            ArrayList<Double> foodCost = costsFromArray(getTextFromVBox(foodArray));
-
-            double tutorWage = Double.parseDouble(tutorsWageBox.getText());
-            double pilotWage = Double.parseDouble(pilotsWageBox.getText());
-            double insuranceCost = Double.parseDouble(insuranceBox.getText());
-
-            int gdAmount = Integer.parseInt(guideAmount.getText());
-            ArrayList<Double> guideCost = costsFromArray(getTextFromVBox(guideArray));
-
-            int entrAmount = Integer.parseInt(entranceAmount.getText());
-            ArrayList<Double> entranceFees = costsFromArray(getTextFromVBox(entranceArray));
-
-            double margin = Double.parseDouble(marginBox.getText());
-            double discount = Double.parseDouble(discountBox.getText());
-
-            trip = new LocalTrip(km, participants, tutors, pilots, drivers, acoAmount, accommodationCost,
-                    fdAmount, foodCost, tutorWage, pilotWage, insuranceCost, gdAmount, guideCost, entrAmount, entranceFees, margin, discount);
+            trip = dataLoader();
+            if (trip == null) {
+                return;
+            }
 
             double cost = trip.calculateTotalCost();
             costBox.setText(String.format(cost + " zł"));
@@ -246,13 +255,13 @@ public class LocalTripController {
         }
     }
 
-
     public void accomodationInsert() {
         accomodationArray.getChildren().clear();
         try {
             int count = Integer.parseInt(accomodationAmount.getText());
             for (int i = 0; i < count; i++) {
                 TextField data = new TextField();
+                textFieldLimitation(data, 4);
                 data.setPromptText("Wprowadź koszt noclegu " + (i + 1) + " w PLN");
                 accomodationArray.getChildren().add(data);
             }
@@ -267,6 +276,7 @@ public class LocalTripController {
             int count = Integer.parseInt(foodAmount.getText());
             for (int i = 0; i < count; i++) {
                 TextField data = new TextField();
+                textFieldLimitation(data, 4);
                 data.setPromptText("Wprowadź koszt posiłku " + (i + 1) + " w PLN");
                 foodArray.getChildren().add(data);
             }
@@ -281,6 +291,7 @@ public class LocalTripController {
             int count = Integer.parseInt(guideAmount.getText());
             for (int i = 0; i < count; i++) {
                 TextField data = new TextField();
+                textFieldLimitation(data, 5);
                 data.setPromptText("Wprowadź koszt przewodnika " + (i + 1) + " w PLN");
                 guideArray.getChildren().add(data);
             }
@@ -295,6 +306,7 @@ public class LocalTripController {
             int count = Integer.parseInt(entranceAmount.getText());
             for (int i = 0; i < count; i++) {
                 TextField data = new TextField();
+                textFieldLimitation(data, 4);
                 data.setPromptText("Wprowadź koszt biletu wstępu za osobę " + (i + 1) + " w PLN");
                 entranceArray.getChildren().add(data);
             }
@@ -365,4 +377,29 @@ public class LocalTripController {
         return String.valueOf(value);
     }
 
+    private void textFieldLimitation(TextField tf, int maxLength) {
+        tf.textProperty().addListener((input, oldValue, newValue) -> {
+                    if (newValue.length() > maxLength) {
+                        tf.setText(newValue.substring(0, maxLength));
+                    }
+                }
+        );
+    }
+
+    private void startLimitation() {
+        textFieldLimitation(distanceBox, 5);
+        textFieldLimitation(participantsBox, 2);
+        textFieldLimitation(tutorsBox, 1);
+        textFieldLimitation(driversBox, 1);
+        textFieldLimitation(pilotsBox, 1);
+        textFieldLimitation(tutorsWageBox, 4);
+        textFieldLimitation(pilotsWageBox, 4);
+        textFieldLimitation(insuranceBox, 5);
+        textFieldLimitation(accomodationAmount, 2);
+        textFieldLimitation(foodAmount, 2);
+        textFieldLimitation(guideAmount, 2);
+        textFieldLimitation(entranceAmount, 2);
+        textFieldLimitation(marginBox, 4);
+        textFieldLimitation(discountBox, 4);
+    }
 }

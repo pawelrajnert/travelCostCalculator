@@ -51,6 +51,10 @@ public class LocalTransportController {
     @FXML
     private TextField costBox;
 
+    @FXML
+    public void initialize() {
+        startLimitation();
+    }
 
     public void goBack() {
         try {
@@ -64,7 +68,7 @@ public class LocalTransportController {
         }
     }
 
-    public void saveLT() {
+    public LocalTransportation dataLoader() {
         try {
             int km = Integer.parseInt(distanceBox.getText());
             int participants = Integer.parseInt(participantsBox.getText());
@@ -72,12 +76,26 @@ public class LocalTransportController {
             int pilots = Integer.parseInt(pilotsBox.getText());
             int drivers = Integer.parseInt(driversBox.getText());
 
-            if (km <= 0 || km > 10000 || participants <= 0 || participants > 46 || tutors <= 0 || tutors > 4 ||
+            if (km <= 0 || km > 20000 || participants <= 0 || participants > 46 || tutors <= 0 || tutors > 4 ||
                     pilots <= 0 || pilots > 2 || drivers <= 0 || drivers > 2) {
                 showAlert("Błąd podczas wpisywania danych", "Wprowadzono niepoprawne dane");
+                return null;
+            }
+
+            return new LocalTransportation(km, participants, tutors, pilots, drivers);
+        } catch (Exception e) {
+            showAlert("Błąd podczas ładowania danych", "Wystąpił nieoczekiwany błąd: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void saveLT() {
+        try {
+            transportation = dataLoader();
+            if (transportation == null) {
                 return;
             }
-            transportation = new LocalTransportation(km, participants, tutors, pilots, drivers);
+
             transportCost();
 
             if (transportation != null) {
@@ -92,7 +110,6 @@ public class LocalTransportController {
                     showAlert("Poprawnie wprowadzone dane", "Zapisano w pliku: " + fileName + ".LocalTransportation");
                 }
             }
-
         } catch (NumberFormatException e) {
             showAlert("Błąd podczas zapisu danych", "Wprowadzono wartości nie będące poprawnymi liczbami");
         } catch (IllegalArgumentException e) {
@@ -101,6 +118,7 @@ public class LocalTransportController {
             showAlert("Błąd podczas zapisu danych", "Wystąpił nieoczekiwany błąd: " + e.getMessage());
         }
     }
+
 
     public void loadLT() {
         FileChooser fileChooser = new FileChooser();
@@ -128,19 +146,11 @@ public class LocalTransportController {
 
     public void transportCost() {
         try {
-            int km = Integer.parseInt(distanceBox.getText());
-            int participants = Integer.parseInt(participantsBox.getText());
-            int tutors = Integer.parseInt(tutorsBox.getText());
-            int pilots = Integer.parseInt(pilotsBox.getText());
-            int drivers = Integer.parseInt(driversBox.getText());
-
-            if (km <= 0 || km > 10000 || participants <= 0 || participants > 46 || tutors <= 0 || tutors > 4 ||
-                    pilots <= 0 || pilots > 2 || drivers <= 0 || drivers > 2) {
-                showAlert("Błąd podczas wprowadzania danych", "Wprowadzono niepoprawne wartości poza możliwym zakresem");
+            transportation = dataLoader();
+            if (transportation == null) {
                 return;
             }
 
-            transportation = new LocalTransportation(km, participants, tutors, pilots, drivers);
             double cost = transportation.calculateTotalCost();
             costBox.setText(String.format(cost + " zł"));
 
@@ -157,4 +167,20 @@ public class LocalTransportController {
         alert.showAndWait();
     }
 
+    private void textFieldLimitation(TextField tf, int maxLength) {
+        tf.textProperty().addListener((input, oldValue, newValue) -> {
+                    if (newValue.length() > maxLength) {
+                        tf.setText(newValue.substring(0, maxLength));
+                    }
+                }
+        );
+    }
+
+    private void startLimitation() {
+        textFieldLimitation(distanceBox, 5);
+        textFieldLimitation(participantsBox, 2);
+        textFieldLimitation(tutorsBox, 1);
+        textFieldLimitation(driversBox, 1);
+        textFieldLimitation(pilotsBox, 1);
+    }
 }
