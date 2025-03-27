@@ -2,9 +2,162 @@
 
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Font?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="prapp.view.ForeignTripController"
             prefHeight="500.0" prefWidth="700.0">
 
+    <top>
+        <Label style="-fx-font-size: 35;" text="Kalkulacja dla wycieczki zagranicznej" textAlignment="CENTER"
+               BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Calibri Light" size="35.0"/>
+            </font>
+        </Label>
+    </top>
+    <bottom>
+        <HBox alignment="CENTER" spacing="15" BorderPane.alignment="CENTER">
+            <Button fx:id="costButton" onAction="#tripCost" text="Oblicz koszt"/>
+            <Button fx:id="saveButton" onAction="#saveLT" text="Zapisz kalkulację"/>
+            <Button fx:id="loadButton" onAction="#loadLT" text="Wczytaj kalkulację"/>
+            <Button fx:id="backButton" onAction="#goBack" text="Powrót"/>
+        </HBox>
+    </bottom>
+    <center>
+        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="AS_NEEDED" style="-fx-padding: 10;"
+                    styleClass="sp-clear" vbarPolicy="AS_NEEDED">
+            <content>
+                <VBox alignment="CENTER" spacing="5" style="-fx-padding: 10;">
+                    <GridPane alignment="CENTER" hgap="40" vgap="25">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0"/>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        </rowConstraints>
+
+                        <Label text="Odległość:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField fx:id="distanceBox" prefWidth="250" promptText="Wprowadź odległość w km"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Liczba uczestników:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="participantsBox" prefWidth="250"
+                                   promptText="Wprowadź liczbę uczestników (max 46)" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="1"/>
+
+                        <Label text="Liczba opiekunów:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="tutorsBox" prefWidth="250" promptText="Wprowadź liczbę opiekunów (max 4)"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Label text="Stawka opiekuna:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="tutorsWageBox" prefWidth="250" promptText="Stawka za cały wyjazd w PLN"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <Label text="Liczba pilotów:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextField fx:id="pilotsBox" prefWidth="250" promptText="Wprowadź liczbę pilotów (max 2)"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <Label text="Stawka pilota:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextField fx:id="pilotsWageBox" prefWidth="250" promptText="Stawka za cały wyjazd w PLN"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+                        <Label text="Liczba kierowców:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+                        <TextField fx:id="driversBox" prefWidth="250" promptText="Wprowadź liczbę kierowców (max 2)"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+                        <Label text="Koszt ubezpieczenia:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+                        <TextField fx:id="insuranceBox" prefWidth="250" promptText="Wprowadź kwotę w PLN"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+                        <Label text="Marża:" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+                        <TextField fx:id="marginBox" prefWidth="250" promptText="Wprowadź marżę w % [0- 100]"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+
+                        <Label text="Zniżka:" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+                        <TextField fx:id="discountBox" prefWidth="250"
+                                   promptText="Wprowadź zniżkę dla grupy w % [0- 100]" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="9"/>
+
+                        <Label text="Kurs EURO:" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
+                        <TextField fx:id="euroBox" prefWidth="250"
+                                   promptText="Wprowadź obecny kurs euro" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="10"/>
+
+                    </GridPane>
+
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="Liczba noclegów:"/>
+                        <TextField fx:id="accomodationAmount"/>
+                        <Button onAction="#accomodationInsert" styleClass="array-button" text="Zatwierdź liczbę"/>
+                    </HBox>
+                    <VBox fx:id="accomodationArray" maxWidth="250.0" spacing="3" alignment="CENTER"/>
+
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="Liczba posiłków:"/>
+                        <TextField fx:id="foodAmount"/>
+                        <Button onAction="#foodInsert" styleClass="array-button" text="Zatwierdź liczbę"/>
+                    </HBox>
+                    <VBox fx:id="foodArray" maxWidth="250.0" spacing="3" alignment="CENTER"/>
+
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="Liczba przewodników:"/>
+                        <TextField fx:id="guideAmount"/>
+                        <Button onAction="#guideInsert" styleClass="array-button" text="Zatwierdź liczbę"/>
+                    </HBox>
+                    <VBox fx:id="guideArray" maxWidth="250.0" spacing="3" alignment="CENTER"/>
+
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="Liczba wstępów:"/>
+                        <TextField fx:id="entranceAmount"/>
+                        <Button onAction="#entranceInsert" styleClass="array-button" text="Zatwierdź liczbę"
+                                alignment="CENTER"/>
+                    </HBox>
+                    <VBox fx:id="entranceArray" maxWidth="250.0" spacing="3" alignment="CENTER"/>
+
+
+                    <GridPane alignment="CENTER" hgap="40" vgap="25">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0"/>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        </rowConstraints>
+                        <children>
+
+                            <Label text="Koszt kalkulacji za całą grupę:" GridPane.columnIndex="0"
+                                   GridPane.rowIndex="0"/>
+                            <TextField fx:id="costBox" editable="false" prefWidth="250" promptText="Kwota w PLN"
+                                       GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                            <Label text="Koszt kalkulacji za osobę:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <TextField fx:id="costPerPersonBox" editable="false" prefWidth="250"
+                                       promptText="Kwota w PLN" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        </children>
+                        <VBox.margin>
+                            <Insets top="20.0" bottom="0" left="0" right="0"/>
+                        </VBox.margin>
+                    </GridPane>
+                </VBox>
+            </content>
+        </ScrollPane>
+
+    </center>
 </BorderPane>
+

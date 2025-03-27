@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -27,15 +28,11 @@ public class MenuController {
     @FXML
     private void clickLTrip() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("local-trip-view.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("local-trip-view.fxml"));
             String ltripCSS = Objects.requireNonNull(this.getClass().getResource("/tripstyle.css")).toExternalForm();
-            BorderPane ltripPane = loader.load();
-            Scene ltripScene = new Scene(ltripPane, 700, 500);
-            ltripScene.getStylesheets().add(ltripCSS);
-            Stage stage = (Stage) LTrip.getScene().getWindow();
-            stage.setScene(ltripScene);
-            stage.show();
-
+            Scene scene = LTrip.getScene();
+            scene.getStylesheets().add(ltripCSS);
+            scene.setRoot(parent);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,20 +40,26 @@ public class MenuController {
 
     @FXML
     private void clickFTrip() {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("foreign-trip-view.fxml"));
+            String ftripCSS = Objects.requireNonNull(this.getClass().getResource("/tripstyle.css")).toExternalForm();
+            Scene scene = FTrip.getScene();
+            scene.getStylesheets().add(ftripCSS);
+            scene.setRoot(parent);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void clickLTrans() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("local-transport-view.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("local-transport-view.fxml"));
             String ltransCSS = Objects.requireNonNull(this.getClass().getResource("/transportstyle.css")).toExternalForm();
-            BorderPane ltransPane = loader.load();
-            Scene ltransScene = new Scene(ltransPane, 700, 500);
-            ltransScene.getStylesheets().add(ltransCSS);
-            Stage stage = (Stage) LTrans.getScene().getWindow();
-            stage.setScene(ltransScene);
-            stage.show();
+            Scene scene = LTrans.getScene();
+            scene.getStylesheets().add(ltransCSS);
+            scene.setRoot(parent);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,14 +69,11 @@ public class MenuController {
     @FXML
     private void clickFTrans() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("foreign-transport-view.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("foreign-transport-view.fxml"));
             String ftransCSS = Objects.requireNonNull(this.getClass().getResource("/transportstyle.css")).toExternalForm();
-            BorderPane ftransPane = loader.load();
-            Scene ftransScene = new Scene(ftransPane, 700, 500);
-            ftransScene.getStylesheets().add(ftransCSS);
-            Stage stage = (Stage) FTrans.getScene().getWindow();
-            stage.setScene(ftransScene);
-            stage.show();
+            Scene scene = FTrans.getScene();
+            scene.getStylesheets().add(ftransCSS);
+            scene.setRoot(parent);
 
         } catch (IOException e) {
             e.printStackTrace();

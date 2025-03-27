@@ -46,14 +46,11 @@
                             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints fillHeight="false" maxHeight="50.0" minHeight="10.0" prefHeight="30.0"
-                                            vgrow="SOMETIMES"/>
                             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0"/>
-                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0"/>
-                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0"/>
-                            <RowConstraints/>
-                            <RowConstraints/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         </rowConstraints>
 
                         <Label text="Odległość:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
@@ -156,9 +153,6 @@
                     </GridPane>
                 </VBox>
             </content>
-            <BorderPane.margin>
-                <Insets/>
-            </BorderPane.margin>
         </ScrollPane>
 
     </center>

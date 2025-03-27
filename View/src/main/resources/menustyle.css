@@ -3,7 +3,7 @@
     -fx-padding: 10px;
 }
 
-Label {
+.title {
     -fx-font-family: "Calibri Light";
     -fx-font-size: 35px;
     -fx-font-weight: bold;
