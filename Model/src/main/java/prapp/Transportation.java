@@ -84,4 +84,14 @@ public abstract class Transportation implements Serializable {
         persons = getParticipantsAmount() + getDriversAmount() + getTutorsAmount() + getPilotsAmount();
         return persons;
     }
+
+    public int roundAmount() {
+        if (getPersons() <= 30) {
+            return 30;
+        } else if (getPersons() <= 40) {
+            return 40;
+        } else {
+            return 50;
+        }
+    }
 }

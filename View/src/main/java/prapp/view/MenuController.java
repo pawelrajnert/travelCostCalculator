@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
 
 import java.io.IOException;
@@ -83,16 +81,11 @@ public class MenuController {
     @FXML
     private void clickInfo() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("info-view.fxml"));
-            String infoCSS = Objects.requireNonNull(this.getClass().getResource("/info.css")).toExternalForm();
-            BorderPane infoPane = loader.load();
-            InfoController infoController = loader.getController();
-            infoController.initialize();
-            Scene infoScene = new Scene(infoPane, 700, 500);
-            infoScene.getStylesheets().add(infoCSS);
-            Stage stage = (Stage) Info.getScene().getWindow();
-            stage.setScene(infoScene);
-            stage.show();
+            Parent parent = FXMLLoader.load(getClass().getResource("info-view.fxml"));
+            String ftransCSS = Objects.requireNonNull(this.getClass().getResource("/info.css")).toExternalForm();
+            Scene scene = FTrans.getScene();
+            scene.getStylesheets().add(ftransCSS);
+            scene.setRoot(parent);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -14,9 +14,12 @@ public class LocalTransportation extends Transportation implements Serializable 
     public double calculateTotalCost() {
         double totalCost = 0;
 
-        LocalTransportCost transportCost = enumChooser();
-        totalCost += getKmAmount() * transportCost.getKmRateLocal();
-
+        if (getKmAmount() < 250) {
+            totalCost += Under250km.valueOf("busshort" + roundAmount()).getShortTripRate();
+        } else {
+            LocalTransportCost transportCost = enumChooser();
+            totalCost += getKmAmount() * transportCost.getKmRateLocal();
+        }
         return totalCost;
     }
 
@@ -28,6 +31,11 @@ public class LocalTransportation extends Transportation implements Serializable 
         } else {
             return LocalTransportCost.bus50;
         }
+    }
+
+    @Override
+    public int roundAmount() {
+        return super.roundAmount();
     }
 
     @Override

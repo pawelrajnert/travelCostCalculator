@@ -129,9 +129,9 @@ public class LocalTripController {
             int fdAmount = Integer.parseInt(foodAmount.getText());
             ArrayList<Double> foodCost = costsFromArray(getTextFromVBox(foodArray));
 
-            double tutorWage = Double.parseDouble(tutorsWageBox.getText());
-            double pilotWage = Double.parseDouble(pilotsWageBox.getText());
-            double insuranceCost = Double.parseDouble(insuranceBox.getText());
+            double tutorWage = Double.parseDouble(tutorsWageBox.getText().replace(",", "."));
+            double pilotWage = Double.parseDouble(pilotsWageBox.getText().replace(",", "."));
+            double insuranceCost = Double.parseDouble(insuranceBox.getText().replace(",", "."));
 
             int gdAmount = Integer.parseInt(guideAmount.getText());
             ArrayList<Double> guideCost = costsFromArray(getTextFromVBox(guideArray));
@@ -139,8 +139,8 @@ public class LocalTripController {
             int entrAmount = Integer.parseInt(entranceAmount.getText());
             ArrayList<Double> entranceFees = costsFromArray(getTextFromVBox(entranceArray));
 
-            double margin = Double.parseDouble(marginBox.getText());
-            double discount = Double.parseDouble(discountBox.getText());
+            double margin = Double.parseDouble(marginBox.getText().replace(",", "."));
+            double discount = Double.parseDouble(discountBox.getText().replace(",", "."));
 
             if (km <= 0 || km > 20000 || participants <= 0 || participants > 46 || tutors <= 0 || tutors > 4 ||
                     pilots <= 0 || pilots > 2 || drivers <= 0 || drivers > 2 || acoAmount < 0 || acoAmount > 31 ||
