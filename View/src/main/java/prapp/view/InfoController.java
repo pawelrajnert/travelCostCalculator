@@ -21,25 +21,6 @@ public class InfoController {
     @FXML
     private Button backButton;
 
-    public void initialize() {
-        showInfo();
-    }
-
-    public void showInfo() {
-        String name = "info.txt";
-        StringBuilder display = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(name))) {
-            String text;
-            while ((text = reader.readLine()) != null) {
-                display.append(text).append("\n");
-            }
-        } catch (IOException e) {
-            display.append("Błąd odczytu informacji o programie.");
-            e.printStackTrace();
-        }
-        infoBox.setText(display.toString());
-    }
-
     public void goBack() {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("menu-view.fxml"));

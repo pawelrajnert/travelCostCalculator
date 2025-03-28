@@ -4,22 +4,42 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-
-
 <?import javafx.scene.layout.HBox?>
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prapp.view.InfoController">
-<top>
-    <Label text="Informacje o programie" BorderPane.alignment="CENTER" />
-</top>
-<center>
-    <TextArea fx:id="infoBox" wrapText="true" editable="false" />
-</center>
-<bottom>
-    <HBox alignment="CENTER" prefHeight="60.0" spacing="20" BorderPane.alignment="CENTER">
-        <children>
-            <Button fx:id="backButton" onAction="#goBack" mnemonicParsing="false" text="Powrót do menu" />
-        </children>
-    </HBox>
-</bottom>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="prapp.view.InfoController">
+    <top>
+        <Label text="Informacje o programie" BorderPane.alignment="CENTER"/>
+    </top>
+    <center>
+        <TextArea fx:id="infoBox" editable="false" wrapText="true" text="
+Transport krajowy i transport zagraniczny:&#10;
+&#10;
+W zależności od wyboru transportu krajowego lub zagranicznego różni się stawka za wybrany autobus.&#10;
+&#10;
+Dla opcji krajowych stawka kilometrowa to:&#10;
+- 9 zł za autokar 50-osobowy,&#10;
+- 8 zł za autokar 40-osobowy,&#10;
+- 6.5 zł za autokar 30-osobowy.&#10;
+&#10;
+UWAGA, DLA TRAS PONIŻEJ 250 km ISTNIEJE USTALONA Z GÓRY STAWKA (NIE JEST TO STAWKA KILOMETROWA):&#10;
+- 2000 zł za autokar 50-osobowy,&#10;
+- 1700 zł za autokar 40-osobowy,&#10;
+- 1400 zł za autokar 30-osobowy.&#10;
+&#10;
+Dla opcji transportu zagranicznego obecnie jedyną ustaloną stawką kilometrową jest 12 zł (autokar 50-osobowy).&#10;
+&#10;
+Wycieczki krajowe i wycieczki zagraniczne:&#10;
+&#10;
+Stawki kilometrowe lub stawki dla przejazdów poniżej 250 km są takie same jak w przypadku transportu.&#10;
+Aby wprowadzić koszta noclegów, jedzenia, przewodników czy biletów wstępów należy nacisnąć przycisk Zatwierdź liczbę,
+a następnie na ekranie wyświetli się pole tekstowe, w które należy wpisać dane."/>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="60.0" spacing="20" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" text="Powrót do menu"/>
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>

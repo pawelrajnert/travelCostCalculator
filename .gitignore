@@ -30,3 +30,5 @@ out/
 META-INF/
 mvnw
 mvnw.cmd
+View/dependency-reduced-pom.xml
+
