@@ -138,12 +138,12 @@
                         </rowConstraints>
                         <children>
 
-                            <Label text="Koszt kalkulacji za całą grupę:" GridPane.columnIndex="0"
+                            <Label text="Koszt za grupę:" GridPane.columnIndex="0"
                                    GridPane.rowIndex="0"/>
                             <TextField fx:id="costBox" editable="false" prefWidth="250" promptText="Kwota w PLN"
                                        GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-                            <Label text="Koszt kalkulacji za osobę:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <Label text="Koszt na osobę:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                             <TextField fx:id="costPerPersonBox" editable="false" prefWidth="250"
                                        promptText="Kwota w PLN" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                         </children>

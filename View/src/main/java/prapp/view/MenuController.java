@@ -29,6 +29,7 @@ public class MenuController {
             Parent parent = FXMLLoader.load(getClass().getResource("local-trip-view.fxml"));
             String ltripCSS = Objects.requireNonNull(this.getClass().getResource("/tripstyle.css")).toExternalForm();
             Scene scene = LTrip.getScene();
+            scene.getStylesheets().clear();
             scene.getStylesheets().add(ltripCSS);
             scene.setRoot(parent);
         } catch (IOException e) {
@@ -42,6 +43,7 @@ public class MenuController {
             Parent parent = FXMLLoader.load(getClass().getResource("foreign-trip-view.fxml"));
             String ftripCSS = Objects.requireNonNull(this.getClass().getResource("/tripstyle.css")).toExternalForm();
             Scene scene = FTrip.getScene();
+            scene.getStylesheets().clear();
             scene.getStylesheets().add(ftripCSS);
             scene.setRoot(parent);
 
@@ -56,6 +58,7 @@ public class MenuController {
             Parent parent = FXMLLoader.load(getClass().getResource("local-transport-view.fxml"));
             String ltransCSS = Objects.requireNonNull(this.getClass().getResource("/transportstyle.css")).toExternalForm();
             Scene scene = LTrans.getScene();
+            scene.getStylesheets().clear();
             scene.getStylesheets().add(ltransCSS);
             scene.setRoot(parent);
 
@@ -70,6 +73,7 @@ public class MenuController {
             Parent parent = FXMLLoader.load(getClass().getResource("foreign-transport-view.fxml"));
             String ftransCSS = Objects.requireNonNull(this.getClass().getResource("/transportstyle.css")).toExternalForm();
             Scene scene = FTrans.getScene();
+            scene.getStylesheets().clear();
             scene.getStylesheets().add(ftransCSS);
             scene.setRoot(parent);
 
@@ -83,7 +87,8 @@ public class MenuController {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("info-view.fxml"));
             String ftransCSS = Objects.requireNonNull(this.getClass().getResource("/info.css")).toExternalForm();
-            Scene scene = FTrans.getScene();
+            Scene scene = Info.getScene();
+            scene.getStylesheets().clear();
             scene.getStylesheets().add(ftransCSS);
             scene.setRoot(parent);
 

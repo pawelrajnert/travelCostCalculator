@@ -14,6 +14,7 @@ public class MenuApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MenuApplication.class.getResource("menu-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 500);
         stage.setTitle("Kalkulator kosztów");
+        scene.getStylesheets().clear();
         String menuCSS = Objects.requireNonNull(this.getClass().getResource("/menustyle.css")).toExternalForm();
         scene.getStylesheets().add(menuCSS);
         stage.setScene(scene);

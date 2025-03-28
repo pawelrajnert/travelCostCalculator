@@ -61,6 +61,7 @@ public class LocalTransportController {
             Parent parent = FXMLLoader.load(getClass().getResource("menu-view.fxml"));
             String menuCSS = Objects.requireNonNull(this.getClass().getResource("/menustyle.css")).toExternalForm();
             Scene scene = backButton.getScene();
+            scene.getStylesheets().clear();
             scene.getStylesheets().add(menuCSS);
             scene.setRoot(parent);
         } catch (IOException e) {
