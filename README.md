@@ -18,8 +18,9 @@ This project is written in **Java** with a graphical user interface based on **J
 
 ### Future development plans (in progress):
 - [ ] Saving and reading data from a database (to replace binary files)
+- [ ] Make a function to print the whole calcuation
 
 ### Additional notes
 - **JavaFX**- GUI is built using **JavaFX**.
 - **Maven**- for managing project dependencies and building the application.
-- **JDK 23**- project is built and tested on **JDK 23**.  
+- **JDK 23**- project is built and tested on **JDK 23**. (Oracle OpenJDK 23.0.1) 
